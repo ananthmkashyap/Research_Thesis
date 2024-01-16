@@ -51,10 +51,20 @@ resource "kubernetes_namespace" "monitoring" {
         name = var.namespace
     }
 }
+
 resource "helm_release" "kube-prometheus" {
+
     name       = "kube-prometheus-stackr"
     namespace  = var.namespace
     version    = var.kube-version
     repository = "https://prometheus-community.github.io/helm-charts"
     chart      = "kube-prometheus-stack"
+}
+
+resource "helm_release" "kepler"{
+    name        = "kepler-exporter"
+    namespace   = var.namespace
+    version     = "0.5.3"
+    repository  = "https://sustainable-computing-io.github.io/kepler-helm-chart"
+    chart       = "kepler"     
 }
