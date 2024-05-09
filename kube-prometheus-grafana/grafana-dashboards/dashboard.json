@@ -872,7 +872,7 @@
             "useBackend": false
           }
         ],
-        "title": "Power Consumption per Node",
+        "title": "Total Power Consumption (kWh per day) per Node",
         "type": "timeseries"
       },
       {

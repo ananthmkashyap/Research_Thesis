@@ -5,17 +5,17 @@
 Our cluster has one Master and two worker nodes.
 
 # Dependencies to be installed
-1. Kind
-2. Kubectl (To access Cluster through CLI)
-3. OpenLens (Optional) (Application access to cluster)
+1. Kubectl (To access Cluster through CLI)
+2. OpenLens (Optional) (Application access to cluster)
 
-kind create cluster  --config=./Cluster.yaml
+minikube start --driver docker --container-runtime docker --nodes 3 --gpus all
 
 ---------- Deploy Prometheus and Grafana ----------
 
-1. $ kubectl apply --server-side -f manifests/setup until kubectl get servicemonitors --all-namespaces ;do date; sleep 1; echo ""; done
+1. $  kubectl apply --server-side -f manifests/setup
+until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
+kubectl apply -f manifests/
 
-2. $ kubectl apply -f manifests/
 
 # To check cluster data from Prometheus UI, we need to forward the Prometheus port to local host.
 
@@ -26,4 +26,6 @@ $ kubectl -n monitoring port-forward service/prometheus-k8s 8080
 
 $ kubectl -n monitoring port-forward service/grafana 3000
 -> Forwarding from 127.0.0.1:3000 -> 3000
+
+https://docs.wandb.ai/tutorials/minikube_gpu
 
